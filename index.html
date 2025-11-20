@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Redimensionar imágenes</title>
+
+  <!-- Estilos -->
+  <link rel="stylesheet" href="styles.css">
+
+  <!-- Librerías externas -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.7.1/jszip.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js" defer></script>
+
+  <!-- Lógica principal -->
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <h1>Redimensionar y descargar</h1>
+
+  <!-- Área drag & drop + input oculto -->
+  <div id="drop-area" class="drop-area">
+    <p>Arrastra aquí tus imágenes<br>o haz clic para seleccionarlas</p>
+    <input id="fileElem" type="file" accept="image/*" multiple hidden>
+  </div>
+
+  <!-- Empresa (exactamente como antes) -->
+  <label>Empresa:&nbsp;
+    <select id="company">
+      <option value="noriega">Noriega Vanzulli</option>
+      <option value="emasa">EMASA</option>
+    </select>
+  </label>
+
+  <button id="resizeButton" disabled>Redimensionar&nbsp;y&nbsp;descargar&nbsp;ZIP</button>
+</body>
+</html>

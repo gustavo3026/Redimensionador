@@ -1,0 +1,23 @@
+/* ——— Layout general ——— */
+body {
+  font-family: system-ui, sans-serif;
+  margin: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+button, select { padding: .5rem 1rem; font-size: 1rem; }
+
+/* ——— Área drag & drop ——— */
+.drop-area {
+  border: 2px dashed #888;
+  border-radius: .75rem;
+  padding: 2rem;
+  text-align: center;
+  transition: background .2s;
+  cursor: pointer;
+  user-select: none;
+}
+.drop-area.dragover { background: #edf7ff; }
+
+.drop-area p { margin: 0; color: #666; }
