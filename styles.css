@@ -1,8 +1,9 @@
 /* =============================================================
-   Estilos Profesionales + Modo Oscuro
+   Estilos Profesionales + Modo Oscuro + Título Futurista
    ============================================================= */
 
 :root {
+    /* --- Variables Generales --- */
     --bg-color: #f4f7f6;
     --container-bg: #ffffff;
     --text-color: #333333;
@@ -12,6 +13,13 @@
     --accent-hover: #0056b3;
     --dragover-bg: #e9f5ff;
     --shadow: 0 4px 12px rgba(0,0,0,0.08);
+
+    /* --- NUEVO: Variables Título Futurista (Modo Claro) --- */
+    /* Estilo "Metal Pulido / Cromo" */
+    --title-grad-start: #434343;
+    --title-grad-end: #9c9c9c;
+    /* Sombra sutil metálica */
+    --title-glow: 2px 2px 4px rgba(0,0,0,0.2), -1px -1px 0px rgba(255,255,255,0.5);
   }
   
   /* Detección automática de modo oscuro del sistema */
@@ -26,10 +34,17 @@
       --accent-hover: #337ab7;
       --dragover-bg: #2a2a2a;
       --shadow: 0 4px 12px rgba(0,0,0,0.3);
+
+      /* --- NUEVO: Variables Título Futurista (Modo Oscuro) --- */
+      /* Estilo "Neón Cyberpunk" (Azul eléctrico a violeta) */
+      --title-grad-start: #00dbde;
+      --title-grad-end: #fc00ff;
+      /* Doble resplandor de neón */
+      --title-glow: 0 0 10px rgba(0, 219, 222, 0.5), 0 0 20px rgba(252, 0, 255, 0.3);
     }
   }
   
-  /* Clase forzada para el toggle manual */
+  /* Clase forzada para el toggle manual (Modo Oscuro) */
   body.dark-mode {
       --bg-color: #121212;
       --container-bg: #1e1e1e;
@@ -40,8 +55,13 @@
       --accent-hover: #337ab7;
       --dragover-bg: #2a2a2a;
       --shadow: 0 4px 12px rgba(0,0,0,0.3);
+      /* Variables Título Oscuro */
+      --title-grad-start: #00dbde;
+      --title-grad-end: #fc00ff;
+      --title-glow: 0 0 10px rgba(0, 219, 222, 0.5), 0 0 20px rgba(252, 0, 255, 0.3);
   }
 
+  /* Clase forzada para el toggle manual (Modo Claro) */
   body.light-mode {
     --bg-color: #f4f7f6;
     --container-bg: #ffffff;
@@ -52,12 +72,17 @@
     --accent-hover: #0056b3;
     --dragover-bg: #e9f5ff;
     --shadow: 0 4px 12px rgba(0,0,0,0.08);
+    /* Variables Título Claro */
+    --title-grad-start: #434343;
+    --title-grad-end: #9c9c9c;
+    --title-glow: 2px 2px 4px rgba(0,0,0,0.2), -1px -1px 0px rgba(255,255,255,0.5);
 }
 
   
   /* ——— Layout general ——— */
   body {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    /* Usamos una fuente del sistema moderna y sans-serif */
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Ubuntu, "Helvetica Neue", sans-serif;
     background-color: var(--bg-color);
     color: var(--text-color);
     margin: 0;
@@ -73,14 +98,15 @@
   .main-container {
     background-color: var(--container-bg);
     padding: 2.5rem;
-    border-radius: 1rem;
+    border-radius: 1.5rem; /* Bordes un poco más redondeados */
     box-shadow: var(--shadow);
     width: 100%;
     max-width: 600px;
     display: flex;
     flex-direction: column;
     gap: 1.5rem;
-    transition: background-color 0.3s;
+    transition: background-color 0.3s, box-shadow 0.3s;
+    border: 1px solid var(--border-color); /* Borde sutil para definición */
   }
   
   /* ——— Cabecera y Toggle ——— */
@@ -88,13 +114,35 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    margin-bottom: 1rem;
   }
   
+  /* --- NUEVO: Estilos del Título H1 Futurista --- */
   h1 {
     margin: 0;
-    font-size: 1.8rem;
-    font-weight: 600;
+    font-size: 2.2rem;   /* Más grande */
+    font-weight: 900;    /* Muy grueso */
+    text-transform: uppercase; /* Mayúsculas */
+    letter-spacing: 2px; /* Espaciado entre letras */
+    
+    /* Magia del Degradado de Texto */
+    background: linear-gradient(135deg, var(--title-grad-start), var(--title-grad-end));
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    
+    /* Magia del Resplandor/Sombra */
+    text-shadow: var(--title-glow);
+    
+    /* Pequeña animación al pasar el mouse */
+    transition: all 0.3s ease;
   }
+
+  h1:hover {
+      letter-spacing: 3px; /* Se expande ligeramente */
+      filter: brightness(1.1);
+  }
+  /* --------------------------------------------- */
   
   #theme-toggle {
     background: none;
@@ -106,9 +154,13 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: background-color 0.2s;
+    transition: background-color 0.2s, transform 0.2s;
+    background-color: var(--bg-color); /* Fondo sutil para el botón */
   }
-  #theme-toggle:hover { background-color: var(--border-color); }
+  #theme-toggle:hover { 
+      background-color: var(--border-color); 
+      transform: scale(1.1); /* Pequeño efecto al pasar el mouse */
+  }
 
   /* Lógica de visualización de iconos */
   .icon-sun { display: none; }
@@ -136,38 +188,46 @@
     text-align: center;
     transition: all 0.3s;
     cursor: pointer;
-    background-color: var(--bg-color);
+    background-color: var(--bg-color); /* Fondo ligeramente distinto al contenedor */
   }
   .drop-area.dragover {
     background-color: var(--dragover-bg);
     border-color: var(--accent-color);
+    transform: scale(1.02); /* Pequeño zoom al arrastrar */
   }
   .drop-area p {
     margin: 0;
     color: var(--text-muted);
     font-size: 1.1rem;
+    font-weight: 500;
   }
   
   /* ——— Previsualización ——— */
   #preview {
     display: flex;
     flex-wrap: wrap;
-    gap: 10px;
+    gap: 12px;
     margin-top: 1rem;
+    justify-content: center; /* Centrar las miniaturas */
   }
   #preview img {
     width: 80px;
     height: 80px;
     object-fit: cover;
-    border-radius: 8px;
+    border-radius: 10px;
     border: 2px solid var(--border-color);
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    transition: transform 0.2s;
+  }
+  #preview img:hover {
+      transform: scale(1.1); /* Zoom en las miniaturas */
   }
   
   /* ——— Controles y Formularios ——— */
   .controls-container {
     display: flex;
     flex-direction: column;
-    gap: 1rem;
+    gap: 1.2rem;
     margin-top: 1rem;
     padding-top: 1.5rem;
     border-top: 1px solid var(--border-color);
@@ -179,20 +239,22 @@
     gap: 0.5rem;
   }
   
-  label { font-weight: 500; }
+  label { font-weight: 600; font-size: 0.95rem; }
   
   select, input[type="number"] {
-    padding: 0.75rem;
+    padding: 0.85rem;
     font-size: 1rem;
     border: 1px solid var(--border-color);
-    border-radius: 0.5rem;
+    border-radius: 0.6rem;
     background-color: var(--bg-color);
     color: var(--text-color);
-    transition: border-color 0.2s;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    font-family: inherit; /* Usar la misma fuente del sistema */
   }
   select:focus, input:focus {
     outline: none;
     border-color: var(--accent-color);
+    box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.1); /* Anillo de enfoque sutil */
   }
   
   .input-pair {
@@ -203,7 +265,7 @@
     flex: 1;
     display: flex;
     flex-direction: column;
-    gap: 0.25rem;
+    gap: 0.35rem;
     font-size: 0.9rem;
   }
   
@@ -212,21 +274,33 @@
   
   /* ——— Botón Principal ——— */
   button#resizeButton {
-    margin-top: 0.5rem;
-    padding: 1rem;
+    margin-top: 0.8rem;
+    padding: 1.1rem;
     font-size: 1.1rem;
-    font-weight: 600;
+    font-weight: 700;
+    letter-spacing: 0.5px;
     border: none;
-    border-radius: 0.5rem;
-    background-color: var(--accent-color);
+    border-radius: 0.6rem;
+    background: linear-gradient(to bottom right, var(--accent-color), var(--accent-hover)); /* Degradado sutil en el botón */
     color: white;
     cursor: pointer;
-    transition: background-color 0.2s, opacity 0.2s;
+    transition: transform 0.1s, opacity 0.2s, box-shadow 0.2s;
+    text-transform: uppercase;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
   }
   button#resizeButton:hover:not(:disabled) {
-    background-color: var(--accent-hover);
+    box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+    transform: translateY(-1px);
+    filter: brightness(1.1);
+  }
+  button#resizeButton:active:not(:disabled) {
+      transform: translateY(1px);
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
   }
   button#resizeButton:disabled {
-    opacity: 0.6;
+    opacity: 0.5;
     cursor: not-allowed;
+    background: var(--border-color);
+    color: var(--text-muted);
+    box-shadow: none;
   }
