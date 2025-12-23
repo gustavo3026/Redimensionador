@@ -2,35 +2,54 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>Redimensionar imágenes</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Redimensionador Profesional</title>
 
-  <!-- Estilos -->
   <link rel="stylesheet" href="styles.css">
 
-  <!-- Librerías externas -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.7.1/jszip.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js" defer></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js" defer></script>
 
-  <!-- Lógica principal -->
   <script src="script.js" defer></script>
 </head>
 <body>
-  <h1>Redimensionar y descargar</h1>
+  
+  <div class="main-container">
+    <header class="header-container">
+      <h1>Redimensionador</h1>
+      <button id="theme-toggle" aria-label="Cambiar modo oscuro/claro">
+        <svg class="icon-sun" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+        <svg class="icon-moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+      </button>
+    </header>
 
-  <!-- Área drag & drop + input oculto -->
-  <div id="drop-area" class="drop-area">
-    <p>Arrastra aquí tus imágenes<br>o haz clic para seleccionarlas</p>
-    <input id="fileElem" type="file" accept="image/*" multiple hidden>
+    <div id="drop-area" class="drop-area">
+      <p>Arrastra aquí tus imágenes<br>o haz clic para seleccionar</p>
+      <input id="fileElem" type="file" accept="image/*" multiple hidden>
+    </div>
+
+    <div id="preview"></div>
+
+    <div class="controls-container">
+      <div class="control-group">
+        <label for="company">Dimensiones:</label>
+        <select id="company">
+          <option value="e25">E25 (Noriega Vanzulli)</option>
+          <option value="e06">E06 (EMASA)</option>
+          <option value="otro">OTRO (Personalizado)</option>
+        </select>
+      </div>
+
+      <div id="custom-dimensions" class="control-group hidden">
+        <div class="input-pair">
+          <label>Ancho (px): <input type="number" id="customWidth" min="1" placeholder="Ej: 500"></label>
+          <label>Alto (px):  <input type="number" id="customHeight" min="1" placeholder="Ej: 500"></label>
+        </div>
+      </div>
+
+      <button id="resizeButton" disabled>Procesar y descargar ZIP</button>
+    </div>
   </div>
 
-  <!-- Empresa (exactamente como antes) -->
-  <label>Empresa:&nbsp;
-    <select id="company">
-      <option value="noriega">Noriega Vanzulli</option>
-      <option value="emasa">EMASA</option>
-    </select>
-  </label>
-
-  <button id="resizeButton" disabled>Redimensionar&nbsp;y&nbsp;descargar&nbsp;ZIP</button>
 </body>
 </html>
